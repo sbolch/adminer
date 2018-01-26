@@ -1,4 +1,16 @@
 {
+	"name": "subbysnake/adminer",
+	"license": "MIT",
+	"type": "project",
+	"description": "A small frame for Adminer to use it with composer",
+	"authors": [
+		{
+			"name": "Szabolcs Surányi",
+			"email": "szabolcs.suranyi@shadesoft.hu",
+			"homepage": "http://shadesoft.hu",
+			"role": "Developer"
+		}
+	],
     "require": {
         "vrana/adminer": "^4.3"
     },
