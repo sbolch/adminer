@@ -1,5 +1,13 @@
 {
     "require": {
         "vrana/adminer": "^4.3"
+    },
+    "scripts": {
+    	"post-install-cmd": [
+    		"php -f vendor/vrana/adminer/compile.php"
+    	],
+    	"post-update-cmd": [
+    		"php -f vendor/vrana/adminer/compile.php"
+    	]
     }
 }

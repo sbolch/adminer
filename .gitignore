@@ -2,3 +2,4 @@
 /vendor/
 composer.lock
 adminer.css
+adminer-[0-9]*.php

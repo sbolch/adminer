@@ -14,4 +14,6 @@ function adminer_object() {
 	return new AdminerPlugin($plugins);
 }
 
-include './vendor/vrana/adminer/adminer-4.3.1.php';
+foreach(glob('./adminer-?.?.?.php') as $adminer) {
+	include_once "./$adminer";
+}
