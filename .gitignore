@@ -1,5 +1,6 @@
 /.idea/
 /vendor/
-composer.lock
 adminer.css
 adminer-[0-9]*.php
+composer.lock
+config.yaml

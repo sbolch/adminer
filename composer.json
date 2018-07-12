@@ -8,18 +8,38 @@
 			"name": "Szabolcs Surányi",
 			"email": "szabolcs.suranyi@shadesoft.hu",
 			"homepage": "http://shadesoft.hu",
-			"role": "Developer"
+			"role": "developer"
 		}
 	],
     "require": {
-        "vrana/adminer": "^4.3"
+		"php": "^5.5.9",
+		"symfony/yaml": "^3.4",
+		"vrana/adminer": "^4.6.3"
+	},
+    "config": {
+    	"platform": {
+    		"php": "5.5.9"
+    	},
+    	"sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Command\\": "command/"
+        }
     },
     "scripts": {
     	"post-install-cmd": [
-    		"php -f vendor/vrana/adminer/compile.php"
+    		"php -f vendor/vrana/adminer/compile.php",
+    		"Command\\Config::generate"
     	],
     	"post-update-cmd": [
-    		"php -f vendor/vrana/adminer/compile.php"
+    		"php -f vendor/vrana/adminer/compile.php",
+    		"Command\\Config::generate"
     	]
+    },
+    "extra": {
+    	"cleaner-ignore": {
+    		"vrana/adminer": true
+    	}
     }
 }
