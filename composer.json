@@ -1,6 +1,6 @@
 {
 	"name": "subbysnake/adminer",
-	"license": "MIT",
+	"license": "WTFPL",
 	"type": "project",
 	"description": "A small frame for Adminer to use it with composer",
 	"homepage": "https://github.com/subbysnake/adminer",
