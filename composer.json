@@ -1,6 +1,6 @@
 {
 	"name": "subbysnake/adminer",
-	"license": "WTFPL",
+	"license": "MIT",
 	"type": "project",
 	"description": "A small frame for Adminer to use it with composer",
 	"homepage": "https://github.com/subbysnake/adminer",
@@ -13,14 +13,11 @@
 		}
 	],
 	"require": {
-		"php": "^5.5.9",
-		"symfony/yaml": "^3.4",
-		"vrana/adminer": "^4.6.3"
+		"php": ">=5.5.9",
+		"symfony/yaml": "^3.4|^4",
+		"vrana/adminer": "*"
 	},
 	"config": {
-		"platform": {
-			"php": "5.5.9"
-		},
 		"sort-packages": true
 	},
 	"autoload": {

@@ -4,9 +4,9 @@ namespace Command;
 
 use Symfony\Component\Yaml\Yaml;
 
-class Config {
+final class Config {
 	
-	public function generate() {
+	public static function generate() {
 		$configFile = __DIR__ . '/../config.yaml';
 
 		if(!file_exists($configFile)) {
@@ -31,12 +31,12 @@ class Config {
 
 				file_put_contents($configFile, Yaml::dump($config));
 
-				echo 'Config created successfully. You can change it manually in the created config.yaml file.';
+				echo 'Config created successfully. You can change it manually in the created config.yaml file.' . PHP_EOL;
 			} catch(\Exception $ex) {
-				echo $ex->getMessage();
+				echo $ex->getMessage() . PHP_EOL;
 			}
 		} else {
-			echo 'Config already exists. You can change it manually in the created config.yaml file.';
+			echo 'Config already exists. You can change it manually in the created config.yaml file.' . PHP_EOL;
 		}
 	}
 }
