@@ -1,9 +1,9 @@
 {
-	"name": "subbysnake/adminer",
+	"name": "d3vy/adminer",
 	"license": "WTFPL",
 	"type": "project",
 	"description": "A small frame for Adminer to use it with composer",
-	"homepage": "https://github.com/subbysnake/adminer",
+	"homepage": "https://github.com/d3vy/adminer",
 	"authors": [
 		{
 			"name": "Szabolcs Surányi",
