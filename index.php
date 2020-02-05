@@ -9,24 +9,27 @@ function adminer_object() {
 		die("Config file missing, please run 'composer install' or 'composer update' for creating one.");
 	}
 
-	$adminerDir = './vendor/vrana/adminer/';
-	$pluginsDir = "{$adminerDir}/plugins/";
-	$designsDir = "{$adminerDir}/designs/";
+	$adminerDir = './vendor/vrana/adminer';
+	$pluginsDir = "$adminerDir/plugins";
+	$designsDir = "$adminerDir/designs";
 	$designs    = array();
 	$config		= Yaml::parseFile('./config.yaml');
 	$parameters	= $config['parameters'];
 
-	include_once "{$pluginsDir}plugin.php";
+	include_once "$pluginsDir/plugin.php";
 
-	foreach(glob("{$pluginsDir}*.php") as $plugin) {
+	foreach(glob("$pluginsDir/*.php") as $plugin) {
 		include_once $plugin;
 	}
 
-	foreach(glob("{$designsDir}*") as $design) {
-		if(($designName = str_replace($designsDir, '', $design)) != 'readme.txt') {
-			$designs["{$design}/adminer.css"] = $designName;
+	foreach(glob("$designsDir/*") as $design) {
+		if(($designName = str_replace("$designsDir/", '', $design)) != 'readme.txt') {
+			$designs["$design/adminer.css"] = $designName;
 		}
 	}
+	$designs['./vendor/archeloth/adminer-theme/barnabas/adminer.css'] = 'barnabas';
+
+	array_multisort($designs);
 
 	$plugins = array(
 		new AdminerEnumOption,
