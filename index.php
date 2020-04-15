@@ -36,6 +36,10 @@ function adminer_object() {
 		new AdminerDesigns($designs)
 	);
 
+	if($parameters['servers'] && count($parameters['servers']) > 0) {
+		$plugins[] = new AdminerLoginServers($parameters['servers']);
+	}
+
 	if($_SERVER['SERVER_NAME'] == 'localhost' && !$parameters['database_password']) {
 		$plugins[] = new AdminerLoginPasswordLess($parameters['password_hash']);
 	}

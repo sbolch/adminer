@@ -8,13 +8,12 @@
 		{
 			"name": "Szabolcs Surányi",
 			"email": "szabolcs.suranyi@shadesoft.hu",
-			"homepage": "http://shadesoft.hu",
-			"role": "developer"
+			"homepage": "https://shadesoft.dev"
 		}
 	],
 	"require": {
-		"php": ">=5.5.9",
-		"archeloth/adminer-theme": "^1.0",
+		"php": "^5.5.9|^7",
+		"archeloth/adminer-theme": "*",
 		"symfony/yaml": "^3.4|^4|^5",
 		"vrana/adminer": "*"
 	},

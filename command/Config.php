@@ -5,7 +5,7 @@ namespace Command;
 use Symfony\Component\Yaml\Yaml;
 
 final class Config {
-	
+
 	public static function generate() {
 		$configFile = __DIR__ . '/../config.yaml';
 
@@ -13,30 +13,51 @@ final class Config {
 			$parameters = array();
 
 			echo 'Use database password (yes/no, default: no): ';
+			$parameters['database_password'] = (bool)preg_match('/^y(.*)/', fgets(STDIN));
 
-			$dbPassword = trim(fgets(STDIN)) == 'yes';
+			echo 'Password' . (!$parameters['database_password'] ? ' (for Adminer login only)' : '') . ': ';
+			$parameters['password_hash'] = password_hash(trim(fgets(STDIN)), PASSWORD_DEFAULT);
 
-			$parameters['database_password'] = $dbPassword;
+			$servers = array();
+			$skip = false;
+			do {
+				echo 'Server name (for multiple servers, use empty name to skip): ';
+				$serverName = trim(fgets(STDIN));
+				$skip = !$serverName;
+				if(!$skip) {
+					echo 'Server address (you can add the port after a colon, default: localhost): ';
+					$serverAddress = trim(fgets(STDIN)) ?: '127.0.0.1';
 
-			echo 'Password' . ($dbPassword ? ' (for Adminer login only)' : '') . ': ';
+					echo 'Server type (mysql|pgsql|sqlite|..., default: mysql)';
+					$serverType = trim(fgets(STDIN)) ?: 'server';
+					if($serverType == 'mysql') {
+						$serverType = 'server';
+					}
 
-			$password = trim(fgets(STDIN));
+					$servers[$serverName] = array(
+						'server' => $serverAddress,
+						'driver' => $serverType
+					);
+				}
+			} while(!$skip);
 
-			$parameters['password_hash'] = password_hash($password, PASSWORD_DEFAULT);
+			if(count($servers) > 0) {
+				$parameters['servers'] = $servers;
+			}
 
 			try {
 				$config = array(
 					'parameters' => $parameters
 				);
 
-				file_put_contents($configFile, Yaml::dump($config));
+				file_put_contents($configFile, Yaml::dump($config, 255));
 
-				echo 'Config created successfully. You can change it manually in the created config.yaml file.' . PHP_EOL;
+				echo 'Config created successfully. You can change your settings manually in config.yaml.' . PHP_EOL;
 			} catch(\Exception $ex) {
 				echo $ex->getMessage() . PHP_EOL;
 			}
 		} else {
-			echo 'Config already exists. You can change it manually in the created config.yaml file.' . PHP_EOL;
+			echo 'Already configured. You can change your settings manually in config.yaml.' . PHP_EOL;
 		}
 	}
 }
