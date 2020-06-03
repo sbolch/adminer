@@ -5,8 +5,12 @@ require './vendor/autoload.php';
 use Symfony\Component\Yaml\Yaml;
 
 function adminer_object() {
-	if($_SERVER['SERVER_NAME'] == 'localhost' && !file_exists('./config.yaml')) {
-		die("Config file missing, please run 'composer install' or 'composer update' for creating one.");
+	if(!file_exists('./config.yaml')) {
+		if($_SERVER['SERVER_NAME'] == 'localhost') {
+			die("Config file missing, please run 'composer install' or 'composer update' for creating one.");
+		} else {
+			die("Configuration error.");
+		}
 	}
 
 	$adminerDir = './vendor/vrana/adminer';
@@ -37,16 +41,23 @@ function adminer_object() {
 	);
 
 	if($parameters['servers'] && count($parameters['servers']) > 0) {
-		$plugins[] = new AdminerLoginServers($parameters['servers']);
-	}
+		$servers = new AdminerLoginServers($parameters['servers']);
+		$plugins[] = $servers;
 
-	if($_SERVER['SERVER_NAME'] == 'localhost' && !$parameters['database_password']) {
-		$plugins[] = new AdminerLoginPasswordLess($parameters['password_hash']);
+		foreach($servers->servers as $server) {
+			if($servers->credentials()[0] == $server['server'] && isset($server['passwordless']) && $server['passwordless']) {
+				$plugins[] = new AdminerLoginIp(array('127.0.0.1', '::1'));
+				break;
+			}
+		}
+
+	} elseif(isset($parameters['passwordless']) && $parameters['passwordless']) {
+		$plugins[] = new AdminerLoginIp(array('127.0.0.1', '::1'));
 	}
 
 	return new AdminerPlugin($plugins);
 }
 
 $versions = glob('./adminer-?.?.?.php');
-
-require_once $versions[count($versions) - 1];
+natsort($versions);
+require_once end($versions);

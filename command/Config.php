@@ -12,12 +12,6 @@ final class Config {
 		if(!file_exists($configFile)) {
 			$parameters = array();
 
-			echo 'Use database password (yes/no, default: no): ';
-			$parameters['database_password'] = (bool)preg_match('/^y(.*)/', fgets(STDIN));
-
-			echo 'Password' . (!$parameters['database_password'] ? ' (for Adminer login only)' : '') . ': ';
-			$parameters['password_hash'] = password_hash(trim(fgets(STDIN)), PASSWORD_DEFAULT);
-
 			$servers = array();
 			$skip = false;
 			do {
@@ -26,7 +20,7 @@ final class Config {
 				$skip = !$serverName;
 				if(!$skip) {
 					echo 'Server address (you can add the port after a colon, default: localhost): ';
-					$serverAddress = trim(fgets(STDIN)) ?: '127.0.0.1';
+					$serverAddress = str_replace('localhost', '127.0.0.1', trim(fgets(STDIN)) ?: 'localhost');
 
 					echo 'Server type (mysql|pgsql|sqlite|..., default: mysql)';
 					$serverType = trim(fgets(STDIN)) ?: 'server';
@@ -35,14 +29,24 @@ final class Config {
 					}
 
 					$servers[$serverName] = array(
-						'server' => $serverAddress,
-						'driver' => $serverType
+						'server'        => $serverAddress,
+						'driver'        => $serverType
 					);
+
+					echo 'Use database password (yes/no, default: no): ';
+					if(!preg_match('/^y(.*)/', fgets(STDIN))) {
+						$servers[$serverName]['passwordless'] = true;
+					}
 				}
 			} while(!$skip);
 
 			if(count($servers) > 0) {
 				$parameters['servers'] = $servers;
+			} else {
+				echo 'Use database password (yes/no, default: no): ';
+				if(!preg_match('/^y(.*)/', fgets(STDIN))) {
+					$parameters['passwordless'] = true;
+				}
 			}
 
 			try {
