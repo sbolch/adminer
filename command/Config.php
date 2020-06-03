@@ -22,10 +22,12 @@ final class Config {
 					echo 'Server address (you can add the port after a colon, default: localhost): ';
 					$serverAddress = str_replace('localhost', '127.0.0.1', trim(fgets(STDIN)) ?: 'localhost');
 
-					echo 'Server type (mysql|pgsql|sqlite|..., default: mysql)';
+					echo 'Server type (mysql|sqlite3|sqlite2|pgsql|oracle|mssql|firebird|simpledb|mongo|elastic, default: mysql)';
 					$serverType = trim(fgets(STDIN)) ?: 'server';
 					if($serverType == 'mysql') {
 						$serverType = 'server';
+					} elseif($serverType == 'sqlite3') {
+						$serverType = 'sqlite';
 					}
 
 					$servers[$serverName] = array(
