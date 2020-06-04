@@ -22,17 +22,15 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Command\\": "command/"
+			"": "src"
 		}
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"php -f vendor/vrana/adminer/compile.php",
-			"Command\\Config::generate"
+			"@php -f vendor/vrana/adminer/compile.php"
 		],
 		"post-update-cmd": [
-			"php -f vendor/vrana/adminer/compile.php",
-			"Command\\Config::generate"
+			"@php -f vendor/vrana/adminer/compile.php"
 		]
 	}
 }
