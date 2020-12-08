@@ -7,7 +7,7 @@ use Symfony\Component\Yaml\Yaml;
 const SETTINGS_FILE = './settings.yaml';
 
 if($_POST && !empty($_POST)) {
-    $settings = array();
+    $settings = [];
 
     unset($_POST['submit']);
 
@@ -16,7 +16,7 @@ if($_POST && !empty($_POST)) {
         unset($_POST['passwordless']);
     }
 
-    $servers = array();
+    $servers = [];
     foreach($_POST as $server) {
         $servers[$server['name']]['server'] = $server['server'] ?: '127.0.0.1';
         $servers[$server['name']]['server'] .= $server['port'] ? ":{$server['port']}" : '';
@@ -36,7 +36,7 @@ if($_POST && !empty($_POST)) {
 
     header('location:./');
 } else {
-    $servers = array();
+    $servers = [];
 
     if(file_exists(SETTINGS_FILE)) {
         $config  = Yaml::parseFile(SETTINGS_FILE);
@@ -51,7 +51,7 @@ if($_POST && !empty($_POST)) {
         }
     }
 
-    $drivers = array(
+    $drivers = [
         'server'     => 'MySQL',
         'sqlite'     => 'SQLite 3',
         'sqlite2'    => 'SQLite 2',
@@ -63,7 +63,7 @@ if($_POST && !empty($_POST)) {
         'mongo'      => 'MongoDB',
         'elastic'    => 'Elasticsearch',
         'clickhouse' => 'ClickHouse'
-    );
+    ];
 
     require_once 'settings.phtml';
 }

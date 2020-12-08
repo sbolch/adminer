@@ -15,6 +15,18 @@
 		{
 			"type": "package",
 			"package": {
+				"name": "arcs/adminer-material-theme",
+				"version": "dev-master",
+				"source": {
+					"type": "git",
+					"url": "https://github.com/arcs-/Adminer-Material-Theme.git",
+					"reference": "master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
 				"name": "niyko/hydra-dark-theme-for-adminer",
 				"version": "dev-master",
 				"source": {
@@ -28,6 +40,7 @@
 	"require": {
 		"php": ">=7",
 		"archeloth/adminer-theme": "*",
+		"arcs/adminer-material-theme": "dev-master",
 		"niyko/hydra-dark-theme-for-adminer": "dev-master",
 		"symfony/yaml": "*",
 		"vrana/adminer": "*"

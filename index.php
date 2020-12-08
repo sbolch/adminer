@@ -15,7 +15,7 @@ function adminer_object() {
 	$adminerDir = './vendor/vrana/adminer';
 	$pluginsDir = "$adminerDir/plugins";
 	$designsDir = "$adminerDir/designs";
-	$designs    = array();
+	$designs    = [];
 	$config		= Yaml::parseFile(SETTINGS_FILE);
 	$servers	= $config['servers'];
 
@@ -31,15 +31,16 @@ function adminer_object() {
 		}
 	}
 	$designs['./vendor/archeloth/adminer-theme/barnabas/adminer.css'] = 'barnabas';
+	$designs['./vendor/arcs/adminer-material-theme/adminer.css'] = 'material';
 	$designs['./vendor/niyko/hydra-dark-theme-for-adminer/adminer.css'] = 'hydra';
 
-	array_multisort($designs);
+	asort($designs);
 
-	$plugins = array(
+	$plugins = [
 		new AdminerEnumOption,
 		new AdminerDesigns($designs),
 		new AdminerSettings
-	);
+	];
 
 	if($servers && count($servers) > 0) {
 		$servers = new AdminerLoginServers($servers);
@@ -47,13 +48,13 @@ function adminer_object() {
 
 		foreach($servers->servers as $server) {
 			if($servers->credentials()[0] == $server['server'] && isset($server['passwordless']) && $server['passwordless']) {
-				$plugins[] = new AdminerLoginIp(array('127.0.0.1', '::1'));
+				$plugins[] = new AdminerLoginIp(['127.0.0.1', '::1']);
 				break;
 			}
 		}
 
 	} elseif(isset($config['passwordless']) && $config['passwordless']) {
-		$plugins[] = new AdminerLoginIp(array('127.0.0.1', '::1'));
+		$plugins[] = new AdminerLoginIp(['127.0.0.1', '::1']);
 	}
 
 	return new AdminerPlugin($plugins);
