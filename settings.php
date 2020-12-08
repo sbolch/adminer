@@ -12,7 +12,7 @@ if($_POST && !empty($_POST)) {
     unset($_POST['submit']);
 
     if(isset($_POST['passwordless'])) {
-        $settings['passwordless'] = (bool)$_POST['passwordless'];
+        $settings['passwordless'] = !!$_POST['passwordless'];
         unset($_POST['passwordless']);
     }
 
@@ -23,7 +23,7 @@ if($_POST && !empty($_POST)) {
         $servers[$server['name']]['driver'] = $server['driver'];
 
         if(isset($server['passwordless'])) {
-            $servers[$server['name']]['passwordless'] = (bool)$server['passwordless'];
+            $servers[$server['name']]['passwordless'] = !!$server['passwordless'];
         }
     }
 

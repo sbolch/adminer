@@ -11,10 +11,25 @@
 			"homepage": "https://shadesoft.dev"
 		}
 	],
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "niyko/hydra-dark-theme-for-adminer",
+				"version": "dev-master",
+				"source": {
+					"type": "git",
+					"url": "https://github.com/Niyko/Hydra-Dark-Theme-for-Adminer.git",
+					"reference": "master"
+				}
+			}
+		}
+	],
 	"require": {
-		"php": "^5.5.9|^7",
+		"php": ">=7",
 		"archeloth/adminer-theme": "*",
-		"symfony/yaml": "^3.4|^4|^5",
+		"niyko/hydra-dark-theme-for-adminer": "dev-master",
+		"symfony/yaml": "*",
 		"vrana/adminer": "*"
 	},
 	"config": {
