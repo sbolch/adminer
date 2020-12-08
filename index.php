@@ -32,6 +32,7 @@ function adminer_object() {
 	}
 	$designs['./vendor/archeloth/adminer-theme/barnabas/adminer.css'] = 'barnabas';
 	$designs['./vendor/arcs/adminer-material-theme/adminer.css'] = 'material';
+	$designs['./vendor/dracula/adminer/theme/adminer.css'] = 'dracula';
 	$designs['./vendor/niyko/hydra-dark-theme-for-adminer/adminer.css'] = 'hydra';
 
 	asort($designs);

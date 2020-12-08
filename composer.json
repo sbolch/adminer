@@ -27,6 +27,18 @@
 		{
 			"type": "package",
 			"package": {
+				"name": "dracula/adminer",
+				"version": "dev-master",
+				"source": {
+					"type": "git",
+					"url": "https://github.com/dracula/adminer.git",
+					"reference": "master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
 				"name": "niyko/hydra-dark-theme-for-adminer",
 				"version": "dev-master",
 				"source": {
@@ -41,6 +53,7 @@
 		"php": ">=7",
 		"archeloth/adminer-theme": "*",
 		"arcs/adminer-material-theme": "dev-master",
+		"dracula/adminer": "dev-master",
 		"niyko/hydra-dark-theme-for-adminer": "dev-master",
 		"symfony/yaml": "*",
 		"vrana/adminer": "*"
