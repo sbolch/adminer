@@ -34,7 +34,7 @@ if($_POST && !empty($_POST)) {
 
     file_put_contents(SETTINGS_FILE, Yaml::dump($settings, 255));
 
-    header('location:/');
+    header('location:./');
 } else {
     $servers = array();
 
@@ -43,10 +43,10 @@ if($_POST && !empty($_POST)) {
         $servers = $config['servers'];
 
         foreach($servers as $name => $server) {
-            list($url, $port) = explode(':', $server['server']);
-            if($port) {
-                $servers[$name]['server'] = $url;
-                $servers[$name]['port']   = $port;
+            $serverData = explode(':', $server['server']);
+            if(isset($serverData[1])) {
+                $servers[$name]['server'] = $serverData[0];
+                $servers[$name]['port']   = $serverData[1];
             }
         }
     }

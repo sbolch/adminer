@@ -13,7 +13,7 @@
         <div class="wrapper">
             <nav class="main-header py-2">
                 <div class="container text-right">
-                    <a href="/" class="btn btn-outline-secondary">Back</a>
+                    <a href="./" class="btn btn-outline-secondary">Back</a>
                     <input name="submit" type="submit" class="btn btn-outline-primary" value="Save">
                 </div>
             </nav>
@@ -31,7 +31,7 @@
                                         <div id="global-settings" class="card-body">
                                             <div class="form-group">
                                                 <div class="form-check mt-2">
-                                                    <input id="passwordless" name="passwordless" class="form-check-input" type="checkbox" value="1" <?=$config['passwordless']?'checked':''?>>
+                                                    <input id="passwordless" name="passwordless" class="form-check-input" type="checkbox" value="1" <?=isset($config['passwordless'])&&$config['passwordless']?'checked':''?>>
                                                     <label for="passwordless" class="form-check-label">Passwordless</label>
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="port-<?=$name?>">Port</label>
-                                                            <input id="port-<?=$name?>" name="<?=$name?>[port]" type="text" class="form-control" placeholder="3306" value="<?=$server['port']?:''?>">
+                                                            <input id="port-<?=$name?>" name="<?=$name?>[port]" type="text" class="form-control" placeholder="3306" value="<?=isset($server['port'])?$server['port']:''?>">
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -120,7 +120,7 @@
                                                         <div class="form-group text-right">
                                                             <button class="btn btn-sm btn-outline-danger remove-database">Remove</button>
                                                             <div class="form-check mt-2">
-                                                                <input id="passwordless-<?=$name?>" name="<?=$name?>[passwordless]" class="form-check-input" type="checkbox" value="1" <?=$server['passwordless']?'checked':''?>>
+                                                                <input id="passwordless-<?=$name?>" name="<?=$name?>[passwordless]" class="form-check-input" type="checkbox" value="1" <?=isset($server['passwordless'])&&$server['passwordless']?'checked':''?>>
                                                                 <label for="passwordless-<?=$name?>" class="form-check-label">Passwordless</label>
                                                             </div>
                                                         </div>
