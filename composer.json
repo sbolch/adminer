@@ -3,12 +3,11 @@
 	"license": "WTFPL",
 	"type": "project",
 	"description": "A small frame for Adminer to use it with composer",
-	"homepage": "https://github.com/d3vy/adminer",
+	"homepage": "https://github.com/sbolch/adminer",
 	"authors": [
 		{
 			"name": "Szabolcs Surányi",
-			"email": "szabolcs.suranyi@shadesoft.hu",
-			"homepage": "https://shadesoft.dev"
+			"email": "arnyek@arnyek.hu"
 		}
 	],
 	"repositories": [
